@@ -2,6 +2,8 @@ import React,{Component} from 'react';
 import './App.css';
 import  'bootstrap/dist/css/bootstrap.min.css'
 import Home from './containers/Home'
+import  {BrowserRouter as Router,Route,Link} from  'react-router-dom'
+import Create from  './containers/create'
 const items=[{
     id:1,
     title:"去杰哥的城堡旅游",
@@ -29,9 +31,16 @@ const items=[{
 class App extends Component{
  render(){
      return (
-         <div className="App">
-             <Home></Home>
-         </div>
+         <Router>
+             <div className="App">
+                 <div className="container pb-5">
+                    <Route path="/" exact component={Home}></Route>
+                     <Route path="/create" exact component={Create}></Route>
+
+                 </div>
+             </div>
+         </Router>
+
      );
  }
 }
