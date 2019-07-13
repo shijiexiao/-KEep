@@ -1,11 +1,13 @@
 import React from 'react'
 import logo from '../logo.svg'
-import {CHART_VIEW, LIST_VIEW, padLeft, parseToYearAndMonth, TYPE_OUTCOME} from '../utility'
+import {CHART_VIEW, LIST_VIEW, padLeft, parseToYearAndMonth, TYPE_OUTCOME,Colors} from '../utility'
 import PriceList from '../components/PriceList'
 import MonthPicker from '../components/MonthPicker'
 import TotalPrice from '../components/TotalPrice'
 import CreateBtn from '../components/CreateBtn'
 import ViewTab from '../components/ViewTab'
+import {Tabs ,Tab}  from "../components/Tabs";
+import Ionicon from 'react-ionicons'
 
 const categories = {
     1: {
@@ -55,6 +57,8 @@ const newItem = {
     date: "2019-01-12",
     cid: 2
 }
+const tabsText = [LIST_VIEW, CHART_VIEW]
+
 
 class Home extends React.Component {
     constructor(props) {
@@ -66,9 +70,9 @@ class Home extends React.Component {
         }
     }
 
-    changeView = (view) => {
+    changeView = (index) => {
         this.setState({
-            tabView: view
+            tabView: tabsText[index],
         })
 
     }
@@ -128,6 +132,8 @@ class Home extends React.Component {
                 totalIncome += item.price
             }
         })
+        const tabIndex = tabsText.findIndex(tabText => tabText === tabView)
+
         return (
             <React.Fragment>
                 <header className="App-header">
@@ -153,10 +159,29 @@ class Home extends React.Component {
 
                 </header>
                 <div className="content-area py-3 px-3">
-                    <ViewTab
-                        activeTab={tabView}
-                        onTabChane={this.changeView}
-                    ></ViewTab>
+                    <Tabs activeIndex={tabIndex} onTabChange={this.changeView}>
+                        <Tab>
+                            <Ionicon
+                                className="rounded-circle mr-2"
+                                fontSize="25px"
+                                color={Colors.blue}
+                                icon='ios-paper'
+                            />
+                            列表模式
+                        </Tab>
+                        <Tab>
+                            <Ionicon
+                                className="rounded-circle mr-2"
+                                fontSize="25px"
+                                color={Colors.blue}
+                                icon='ios-pie'
+                            />
+                            图表模式
+                        </Tab>
+                    </Tabs>
+
+
+                  1
                     <CreateBtn onClick={this.createItem}>
 
                     </CreateBtn>

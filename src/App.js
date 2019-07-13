@@ -33,9 +33,14 @@ class App extends Component{
      return (
          <Router>
              <div className="App">
+                 <Link to='/'>HOme</Link>
+                 <Link to='/create'>create</Link>
+                 <Link to='/edit/10'>edit</Link>
+
                  <div className="container pb-5">
                     <Route path="/" exact component={Home}></Route>
                      <Route path="/create" exact component={Create}></Route>
+                     <Route path="/edit/:id" exact component={Create}></Route>
 
                  </div>
              </div>
